@@ -1,6 +1,5 @@
 """Utilities related to file I/O and parsing"""
 
-import json
 import gzip
 import duckdb
 import numpy as np
@@ -16,7 +15,9 @@ def ensurePathsExist(filePaths: Dict[str, Path]):
     """
     for key, value in filePaths.items():
         if not value.exists():
-            raise FileNotFoundError(f"{key} was assumed to be located at '{str(value)}'. It is missing")
+            raise FileNotFoundError(
+                f"{key} was assumed to be located at '{str(value)}'. It is missing"
+            )
 
 
 def resolve_sample_specific_file_paths(STARsolo_out, feature_type, matrix_type):
@@ -85,7 +86,9 @@ def load_mtx_table(mtx_path: Path, con: duckdb.DuckDBPyConnection) -> None:
     )
 
 
-def sum_counts_by(con: duckdb.DuckDBPyConnection, cols: np.ndarray, by="gene") -> np.ndarray:
+def sum_counts_by(
+    con: duckdb.DuckDBPyConnection, cols: np.ndarray, by="gene"
+) -> np.ndarray:
     """
     Sum rounded gene counts from a sparse matrix
 
@@ -148,4 +151,7 @@ def load_partial_mtx(con: duckdb.DuckDBPyConnection, cols: np.ndarray) -> sp.coo
     """
     ).fetchnumpy()
 
-    return sp.coo_array((triplets["count"], (triplets["gene"] - 1, triplets["barcode"] - 1)), shape=(nrows, ncols))
+    return sp.coo_array(
+        (triplets["count"], (triplets["gene"] - 1, triplets["barcode"] - 1)),
+        shape=(nrows, ncols),
+    )
