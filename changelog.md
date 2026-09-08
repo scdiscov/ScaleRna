@@ -1,4 +1,17 @@
 # Version 2.1
+## 2.1.2
+* Add new v2.0 QuantumScaleRNA Default samplesheets for FASTQ generation and update documentation to recommend them as the default (QSR-1 to QSR-12) for datasets not using QSR-P
+
+## 2.1.1
+* Fix "Reads Mapped to Genome" metric with estimated reads mapping to too many loci (>6); values may differ from 2.1.0
+* Fix numeric column type handling in ScalePlex sample stats output
+* Fix sample name validation logic
+* Add new validation for fastq filename uniqueness (across subdirectories in `--fastqDir`)
+* Update recommended Nextflow version to v25.10.2 or v25.04.7
+* Update saturation metric formula and "Reads Mapped to Genome" description in docs
+* Update BCL conversion sheet generation (`--fastqGenerate`)
+* Revise ScalePlex documentation
+
 ## 2.1.0
 * Cell-calling is done for each sub-library separately, improving performance for large runs
 * Changes to CellFinder to align more closely with EmptyDrops
